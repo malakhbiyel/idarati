@@ -39,6 +39,12 @@ public class CoutService {
                 .map(coutMapper::toDto);
     }
 
+    public CoutDto saveCout(CoutDto coutDto) {
+        Cout cout = coutMapper.toEntity(coutDto);
+        Cout savedCout = coutRepository.save(cout);
+        return coutMapper.toDto(savedCout);
+    }
+
     public CoutDto updateCout(Long id, CoutDto coutDto) {
         Cout existingCout = coutRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cout not found with id: " + id));

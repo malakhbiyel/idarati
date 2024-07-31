@@ -76,6 +76,11 @@ public class DocumentService {
                 .collect(Collectors.toList());
     }
 
+    public DocumentDto saveDocument(DocumentDto documentDto) {
+        Document document = documentMapper.toEntity(documentDto);
+        Document savedDocument = documentRepository.save(document);
+        return documentMapper.toDto(savedDocument);
+    }
 
     public DocumentDto updateDocument(Long id, DocumentDto documentDto) {
         Document existingDocument = documentRepository.findById(id)

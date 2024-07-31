@@ -38,6 +38,12 @@ public class ConditionService {
                 .map(conditionMapper::toDto);
     }
 
+    public ConditionDto saveCondition(ConditionDto conditionDto) {
+        Condition condition = conditionMapper.toEntity(conditionDto);
+        Condition savedCondition = conditionRepository.save(condition);
+        return conditionMapper.toDto(savedCondition);
+    }
+
     public ConditionDto updateCondition(Long id, ConditionDto conditionDto) {
         Condition existingCondition = conditionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Condition not found with id: " + id));

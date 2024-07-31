@@ -64,6 +64,24 @@ public class DossierService {
                 .collect(Collectors.toList());
     }
 
+    public DossierDto saveDossier(DossierDto dossierDto) {
+        Dossier dossier = dossierMapper.toEntity(dossierDto);
+
+        dossier.setProcedure(procedureRepository.findById(dossierDto.getProcedure().getProcedureId())
+                .orElseThrow(() -> new RuntimeException("Procedure not found with id: " + dossierDto.getProcedure().getProcedureId())));
+
+        dossier.setCondition(conditionRepository.findById(dossierDto.getCondition().getConditionId())
+                .orElseThrow(() -> new RuntimeException("Condition not found with id: " + dossierDto.getCondition().getConditionId())));
+
+        dossier.setDocumentsList(dossierDto.getDocumentsList()
+                .stream()
+                .map(documentMapper::toEntity)
+                .collect(Collectors.toList()));
+
+        Dossier savedDossier = dossierRepository.save(dossier);
+        return dossierMapper.toDto(savedDossier);
+    }
+
     public DossierDto updateDossier(Long id, DossierDto dossierDto) {
         Dossier existingDossier = dossierRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Dossier not found with id: " + id));

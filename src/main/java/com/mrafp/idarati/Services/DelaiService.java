@@ -39,6 +39,12 @@ public class DelaiService {
                 .map(delaiMapper::toDto);
     }
 
+    public DelaiDto saveDelai(DelaiDto delaiDto) {
+        Delai delai = delaiMapper.toEntity(delaiDto);
+        Delai savedDelai = delaiRepository.save(delai);
+        return delaiMapper.toDto(savedDelai);
+    }
+
     public DelaiDto updateDelai(Long id, DelaiDto delaiDto) {
         Delai existingDelai = delaiRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Delai not found with id: " + id));

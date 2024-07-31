@@ -38,6 +38,12 @@ public class FamilleDocumentService {
                 .map(familleDocumentMapper::toDto);
     }
 
+    public FamilleDocumentDto saveFamilleDocument(FamilleDocumentDto familleDocumentDto) {
+        FamilleDocument familleDocument = familleDocumentMapper.toEntity(familleDocumentDto);
+        FamilleDocument savedFamilleDocument = familleDocumentRepository.save(familleDocument);
+        return familleDocumentMapper.toDto(savedFamilleDocument);
+    }
+
     public FamilleDocumentDto updateFamilleDocument(Long id, FamilleDocumentDto familleDocumentDto) {
         FamilleDocument existingFamilleDocument = familleDocumentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("FamilleDocument not found with id: " + id));

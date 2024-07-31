@@ -8,5 +8,5 @@ import org.mapstruct.Mapper;
 public interface DelaiMapper {
 
     DelaiDto toDto(Delai delai);
-    Delai ToEntity(DelaiDto delaiDto);
+    Delai toEntity(DelaiDto delaiDto);
 }

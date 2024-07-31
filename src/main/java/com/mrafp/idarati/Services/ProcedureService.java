@@ -46,7 +46,7 @@ public class ProcedureService {
                 .map(procedureMapper::toDto);
     }
 
-    public ProcedureDto createProcedure(ProcedureDto procedureDto) {
+    public ProcedureDto saveProcedure(ProcedureDto procedureDto) {
         Procedure procedure = procedureMapper.toEntity(procedureDto);
         setRelatedEntities(procedure, procedureDto);
         Procedure savedProcedure = procedureRepository.save(procedure);
