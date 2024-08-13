@@ -14,7 +14,4 @@ public interface ProcedureRepository extends JpaRepository<Procedure, Long> {
     List<Procedure> findAll();
     Optional<Procedure> findByTitre(String titre);
     List<Procedure> findByAdminSource_AdministrationId(@NonNull Long adminSourceId);
-    List<Procedure> findByAntenne_AntenneId(@NonNull Long antenneId);
-    List<Procedure> findByDelai_DelaiId(@NonNull Long delaiId);
-    List<Procedure> findByCout_CoutId(@NonNull Long coutId);
 }

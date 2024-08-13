@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: author
+      changes:
+        - insert:
+            tableName: administration
+            columns:
+              - column:
+                  name: nom_admin
+                  value: 'Admin1'
+        - insert:
+            tableName: antennes
+            columns:
+              - column:
+                  name: admin_depot
+                  value: 'Depot1'
+              - column:
+                  name: admin_reception
+                  value: 'Reception1'
+        - insert:
+            tableName: condition
+            columns:
+              - column:
+                  name: nom_condition
+                  value: 'Condition1'
+              - column:
+                  name: termes
+                  value: 'Terms1'
+        - insert:
+            tableName: cout
+            columns:
+              - column:
+                  name: valeur
+                  value: '100.0'
+        - insert:
+            tableName: delai
+            columns:
+              - column:
+                  name: duree
+                  value: '30'
+        - insert:
+            tableName: famille_document
+            columns:
+              - column:
+                  name: famille_id
+                  value: '1'
+        - insert:
+            tableName: procedure
+            columns:
+              - column:
+                  name: titre
+                  value: 'Procedure1'
+              - column:
+                  name: description
+                  value: 'Description1'
+              - column:
+                  name: admin_source_id
+                  value: '1'
+              - column:
+                  name: antenne_id
+                  value: '1'
+              - column:
+                  name: delai_id
+                  value: '1'
+              - column:
+                  name: cout_id
+                  value: '1'
+        - insert:
+            tableName: dossier
+            columns:
+              - column:
+                  name: procedure_id
+                  value: '1'
+              - column:
+                  name: condition_id
+                  value: '1'
+        - insert:
+            tableName: document
+            columns:
+              - column:
+                  name: code
+                  value: 'DOC001'
+              - column:
+                  name: titre
+                  value: 'Document1'
+              - column:
+                  name: description
+                  value: 'Description of Document1'
+              - column:
+                  name: est_acte
+                  valueBoolean: 'true'
+              - column:
+                  name: dossier_id
+                  value: '1'
+              - column:
+                  name: procedure_id
+                  value: '1'
+              - column:
+                  name: famille_id
+                  value: '1'

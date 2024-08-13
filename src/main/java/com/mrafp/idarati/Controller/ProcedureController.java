@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/procedures")
+@RequestMapping("/api/procedures")
 public class ProcedureController {
 
     private final ProcedureService procedureService;
