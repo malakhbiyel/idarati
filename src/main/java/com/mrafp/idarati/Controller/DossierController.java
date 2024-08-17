@@ -45,11 +45,6 @@ public class DossierController {
         return new ResponseEntity<>(dossiers, HttpStatus.OK);
     }
 
-    @GetMapping("/document/{documentId}")
-    public ResponseEntity<List<DossierDto>> getDossiersByDocumentId(@PathVariable("documentId") Long documentId) {
-        List<DossierDto> dossiers = dossierService.getDossiersByDocumentId(documentId);
-        return new ResponseEntity<>(dossiers, HttpStatus.OK);
-    }
 
     @PostMapping
     public ResponseEntity<DossierDto> saveDossier(@RequestBody DossierDto dossierDto) {

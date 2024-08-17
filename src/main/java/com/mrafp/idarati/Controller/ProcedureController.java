@@ -34,6 +34,23 @@ public class ProcedureController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @GetMapping("/titre")
+    public ResponseEntity<ProcedureDto> getProcedureByTitre(@RequestParam String titre) {
+        Optional<ProcedureDto> procedure = procedureService.getProcedureByTitre(titre);
+        return procedure
+                .map(proc -> new ResponseEntity<>(proc, HttpStatus.OK))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @GetMapping("/admin-source/{adminSourceId}")
+    public ResponseEntity<List<ProcedureDto>> getProceduresByAdminSourceId(@PathVariable Long adminSourceId) {
+        List<ProcedureDto> procedures = procedureService.getProceduresByAdminSourceId(adminSourceId);
+        return procedures.isEmpty()
+                ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+                : new ResponseEntity<>(procedures, HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity<ProcedureDto> saveProcedure(@RequestBody ProcedureDto procedureDto) {
         ProcedureDto createdProcedure = procedureService.saveProcedure(procedureDto);

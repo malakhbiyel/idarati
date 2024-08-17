@@ -15,5 +15,4 @@ public interface DossierRepository extends JpaRepository<Dossier, Long> {
     List<Dossier> findAll();
     List<Dossier> findByProcedure_ProcedureId(Long procedureId);
     List<Dossier> findByCondition_ConditionId(Long conditionId);
-    List<Dossier> findByDocumentsList_DocumentId(Long documentId);
 }

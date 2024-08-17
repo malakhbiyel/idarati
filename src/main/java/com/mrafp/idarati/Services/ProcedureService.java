@@ -45,10 +45,33 @@ public class ProcedureService {
         return procedureRepository.findById(id)
                 .map(procedureMapper::toDto);
     }
+    public Optional<ProcedureDto> getProcedureByTitre(String titre) {
+        return procedureRepository.findByTitre(titre)
+                .map(procedureMapper::toDto);
+    }
+
+    public List<ProcedureDto> getProceduresByAdminSourceId(Long adminSourceId) {
+        return procedureRepository.findByAdministration_AdministrationId(adminSourceId)
+                .stream()
+                .map(procedureMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     public ProcedureDto saveProcedure(ProcedureDto procedureDto) {
         Procedure procedure = procedureMapper.toEntity(procedureDto);
-        setRelatedEntities(procedure, procedureDto);
+
+        procedure.setAdministration(administrationRepository.findById(procedureDto.getAdministration().getAdministrationId())
+                .orElseThrow(() -> new RuntimeException("Administration not found with id: " + procedureDto.getAdministration().getAdministrationId())));
+
+        procedure.setAntenne(antenneRepository.findById(procedureDto.getAntenne().getAntenneId())
+                .orElseThrow(() -> new RuntimeException("Antenne not found with id: " + procedureDto.getAntenne().getAntenneId())));
+
+        procedure.setDelai(delaiRepository.findById(procedureDto.getDelai().getDelaiId())
+                .orElseThrow(() -> new RuntimeException("Delai not found with id: " + procedureDto.getDelai().getDelaiId())));
+
+        procedure.setCout(coutRepository.findById(procedureDto.getCout().getCoutId())
+                .orElseThrow(() -> new RuntimeException("Cout not found with id: " + procedureDto.getCout().getCoutId())));
+
         Procedure savedProcedure = procedureRepository.save(procedure);
         return procedureMapper.toDto(savedProcedure);
     }
@@ -59,7 +82,14 @@ public class ProcedureService {
 
         existingProcedure.setTitre(procedureDto.getTitre());
         existingProcedure.setDescription(procedureDto.getDescription());
-        setRelatedEntities(existingProcedure, procedureDto);
+        existingProcedure.setAdministration(administrationRepository.findById(procedureDto.getAdministration().getAdministrationId())
+                .orElseThrow(() -> new RuntimeException("Administaration not found with id: " + procedureDto.getAdministration().getAdministrationId())));
+        existingProcedure.setAntenne(antenneRepository.findById(procedureDto.getAntenne().getAntenneId())
+                .orElseThrow(() -> new RuntimeException("Antenne not found with id: " + procedureDto.getAntenne().getAntenneId())));
+        existingProcedure.setDelai(delaiRepository.findById(procedureDto.getDelai().getDelaiId())
+                .orElseThrow(() -> new RuntimeException("Delai not found with id: " + procedureDto.getDelai().getDelaiId())));
+        existingProcedure.setCout(coutRepository.findById(procedureDto.getCout().getCoutId())
+                .orElseThrow(() -> new RuntimeException("Cout not found with id: " + procedureDto.getCout().getCoutId())));
 
         Procedure updatedProcedure = procedureRepository.save(existingProcedure);
         return procedureMapper.toDto(updatedProcedure);
@@ -72,30 +102,5 @@ public class ProcedureService {
         procedureRepository.deleteById(id);
     }
 
-    private void setRelatedEntities(Procedure procedure, ProcedureDto procedureDto) {
-        if (procedureDto.getAdminSourceId() != null) {
-            Administration adminSource = administrationRepository.findById(procedureDto.getAdminSourceId())
-                    .orElseThrow(() -> new RuntimeException("AdminSource not found with id: " + procedureDto.getAdminSourceId()));
-            procedure.setAdminSource(adminSource);
-        }
-
-        if (procedureDto.getAntenneId() != null) {
-            Antenne antenne = antenneRepository.findById(procedureDto.getAntenneId())
-                    .orElseThrow(() -> new RuntimeException("Antenne not found with id: " + procedureDto.getAntenneId()));
-            procedure.setAntenne(antenne);
-        }
-
-        if (procedureDto.getDelaiId() != null) {
-            Delai delai = delaiRepository.findById(procedureDto.getDelaiId())
-                    .orElseThrow(() -> new RuntimeException("Delai not found with id: " + procedureDto.getDelaiId()));
-            procedure.setDelai(delai);
-        }
-
-        if (procedureDto.getCoutId() != null) {
-            Cout cout = coutRepository.findById(procedureDto.getCoutId())
-                    .orElseThrow(() -> new RuntimeException("Cout not found with id: " + procedureDto.getCoutId()));
-            procedure.setCout(cout);
-        }
-    }
 }
 

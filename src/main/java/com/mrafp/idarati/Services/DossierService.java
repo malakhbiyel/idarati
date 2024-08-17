@@ -57,12 +57,6 @@ public class DossierService {
                 .collect(Collectors.toList());
     }
 
-    public List<DossierDto> getDossiersByDocumentId(Long documentId) {
-        return dossierRepository.findByDocumentsList_DocumentId(documentId)
-                .stream()
-                .map(dossierMapper::toDto)
-                .collect(Collectors.toList());
-    }
 
     public DossierDto saveDossier(DossierDto dossierDto) {
         Dossier dossier = dossierMapper.toEntity(dossierDto);

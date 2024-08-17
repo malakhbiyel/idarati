@@ -48,34 +48,6 @@ public class DocumentService {
                 .collect(Collectors.toList());
     }
 
-    public List<DocumentDto> getDocumentsByEstActe(Boolean estActe) {
-        return documentRepository.findByEstActe(estActe)
-                .stream()
-                .map(documentMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    public List<DocumentDto> getDocumentsByDossierId(Long dossierId) {
-        return documentRepository.findByDossier_DossierId(dossierId)
-                .stream()
-                .map(documentMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    public List<DocumentDto> getDocumentsByProcedureId(Long procedureId) {
-        return documentRepository.findByProcedure_ProcedureId(procedureId)
-                .stream()
-                .map(documentMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    public List<DocumentDto> getDocumentsByFamilleDocumentId(Long familleId) {
-        return documentRepository.findByFamilleDocument_FamilleId(familleId)
-                .stream()
-                .map(documentMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
     public DocumentDto saveDocument(DocumentDto documentDto) {
         Document document = documentMapper.toEntity(documentDto);
         Document savedDocument = documentRepository.save(document);

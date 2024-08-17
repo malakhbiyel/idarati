@@ -26,8 +26,8 @@ public class Procedure {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "admin_source_id", nullable = false)
-    private Administration adminSource;
+    @JoinColumn(name = "administration_id", nullable = false)
+    private Administration administration;
 
     @ManyToOne
     @JoinColumn(name = "antenne_id", nullable = false)
@@ -41,7 +41,5 @@ public class Procedure {
     @JoinColumn(name = "cout_id", nullable = false)
     private Cout cout;
 
-    @OneToMany(mappedBy = "procedure")
-    private List<Dossier> dossiers;
 
 }

@@ -33,11 +33,11 @@ CREATE TABLE procedure (
                            procedure_id SERIAL PRIMARY KEY,
                            titre VARCHAR(255) NOT NULL,
                            description VARCHAR(255),
-                           admin_source_id BIGINT NOT NULL,
+                           administration_id BIGINT NOT NULL,
                            antenne_id BIGINT NOT NULL,
                            delai_id BIGINT NOT NULL,
                            cout_id BIGINT NOT NULL,
-                           CONSTRAINT fk_procedure_admin_source FOREIGN KEY (admin_source_id) REFERENCES administration(administration_id),
+                           CONSTRAINT fk_procedure_administration FOREIGN KEY (administration_id) REFERENCES administration(administration_id),
                            CONSTRAINT fk_procedure_antenne FOREIGN KEY (antenne_id) REFERENCES antennes(antenne_id),
                            CONSTRAINT fk_procedure_delai FOREIGN KEY (delai_id) REFERENCES delai(delai_id),
                            CONSTRAINT fk_procedure_cout FOREIGN KEY (cout_id) REFERENCES cout(cout_id)

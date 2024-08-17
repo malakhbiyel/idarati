@@ -32,7 +32,7 @@ public class DocumentController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/title")
+    @GetMapping("/titre")
     public ResponseEntity<List<DocumentDto>> getDocumentsByTitre(@RequestParam String titre) {
         List<DocumentDto> documents = documentService.getDocumentsByTitre(titre);
         return new ResponseEntity<>(documents, HttpStatus.OK);
@@ -44,29 +44,6 @@ public class DocumentController {
         return new ResponseEntity<>(documents, HttpStatus.OK);
     }
 
-    @GetMapping("/isActe")
-    public ResponseEntity<List<DocumentDto>> getDocumentsByEstActe(@RequestParam Boolean estActe) {
-        List<DocumentDto> documents = documentService.getDocumentsByEstActe(estActe);
-        return new ResponseEntity<>(documents, HttpStatus.OK);
-    }
-
-    @GetMapping("/dossier")
-    public ResponseEntity<List<DocumentDto>> getDocumentsByDossierId(@RequestParam Long dossierId) {
-        List<DocumentDto> documents = documentService.getDocumentsByDossierId(dossierId);
-        return new ResponseEntity<>(documents, HttpStatus.OK);
-    }
-
-    @GetMapping("/procedure")
-    public ResponseEntity<List<DocumentDto>> getDocumentsByProcedureId(@RequestParam Long procedureId) {
-        List<DocumentDto> documents = documentService.getDocumentsByProcedureId(procedureId);
-        return new ResponseEntity<>(documents, HttpStatus.OK);
-    }
-
-    @GetMapping("/famille")
-    public ResponseEntity<List<DocumentDto>> getDocumentsByFamilleDocumentId(@RequestParam Long familleId) {
-        List<DocumentDto> documents = documentService.getDocumentsByFamilleDocumentId(familleId);
-        return new ResponseEntity<>(documents, HttpStatus.OK);
-    }
 
     @PostMapping
     public ResponseEntity<DocumentDto> saveDocument(@RequestBody DocumentDto documentDto) {

@@ -16,8 +16,4 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
     @NonNull
     List<Document> findByTitre(@NonNull String titre);
     List<Document> findByCode(@NonNull String code);
-    List<Document> findByEstActe(@NonNull Boolean estActe);
-    List<Document> findByDossier_DossierId(@NonNull Long dossierId);
-    List<Document> findByProcedure_ProcedureId(@NonNull Long procedureId);
-    List<Document> findByFamilleDocument_FamilleId(Long familleId);
 }

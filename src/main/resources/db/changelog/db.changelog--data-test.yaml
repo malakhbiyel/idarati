@@ -55,7 +55,7 @@ databaseChangeLog:
                   name: description
                   value: 'Description1'
               - column:
-                  name: admin_source_id
+                  name: administration_id
                   value: '1'
               - column:
                   name: antenne_id
