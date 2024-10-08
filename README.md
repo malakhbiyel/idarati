@@ -1,6 +1,6 @@
 # idarati API
 
-idarati API is a powerful tool designed to efficiently manage and streamline administrative processes, including document management, condition handling, and more. It offers a robust backend solution for modern administrative needs.
+idarati API is a tool designed to efficiently manage and streamline administrative processes, including document management, condition handling, and more. It offers a robust backend solution for modern administrative needs.
 
 ## Key Features
 - **Procedure Management**: Easily define and manage various administrative procedures, including associated documents, conditions, costs, and timelines.
